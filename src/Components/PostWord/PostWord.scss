@@ -1,0 +1,22 @@
+.post__word {
+    width : 100%;
+    margin: 0 auto;
+
+    .word-enter {
+        opacity: 0;
+    }
+
+    .word-enter-active {
+        opacity   : 1;
+        transition: opacity 500ms ease-in;
+    }
+
+    .word-exit {
+        opacity: 1;
+    }
+
+    .word-exit-active {
+        opacity   : 0;
+        transition: opacity 500ms ease-in;
+    }
+}

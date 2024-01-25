@@ -1,0 +1,19 @@
+.list__container {
+    width         : 90%;
+    display       : flex;
+    flex-direction: column;
+    margin-bottom : 1rem;
+
+
+    .post__word {
+        display        : flex;
+        flex-direction : column;
+        margin         : 0 auto;
+        justify-content: space-between;
+
+        .warning {
+            margin   : 2rem auto 0 auto;
+            font-size: 1.5em;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+@import '../style/templates';
+@import '../style/vars';
+
+.check__button {
+    @include contentButton (10rem, 2.2rem, $colorLight, 1px solid transparent, $colorDark);
+}
+
+.checked__button {
+    @include contentButton (10rem, 2.2rem, $colorDark, 2px solid $colorDark, $colorLight);
+}

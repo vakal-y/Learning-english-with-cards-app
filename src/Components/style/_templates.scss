@@ -1,0 +1,24 @@
+@mixin contentButton($width, $height, $color, $border, $background-color) {
+    width : $width;
+    height: $height;
+
+    display        : flex;
+    justify-content: space-around;
+    align-items    : center;
+    margin         : 0.5rem 1rem;
+    padding        : 0.5rem;
+
+
+    color           : $color;
+    border-radius   : 0.3rem;
+    border          : $border;
+    background-color: $background-color;
+    cursor          : pointer;
+    transition      : border-color 0.25s;
+
+    &:hover {
+        border-color: $colorGrey;
+    }
+
+    @content;
+}

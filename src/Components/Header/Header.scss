@@ -1,0 +1,18 @@
+@import '../style/vars';
+
+.header__container {
+    width : 100vw;
+    height: 7vh;
+
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+
+    background-color: $colorDark;
+    color           : $colorLight;
+
+    img {
+        width      : 3rem;
+        margin-left: 1rem;
+    }
+}

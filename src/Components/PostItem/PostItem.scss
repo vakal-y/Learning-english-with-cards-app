@@ -1,0 +1,30 @@
+@import '/src/Components/style/templates';
+@import '/src/Components/style/vars';
+
+.post__item {
+    width          : 100%;
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+
+    .item {
+        height       : 2rem;
+        flex-basis   : 22%;
+        display      : flex;
+        margin-right : 1rem;
+        padding      : 0.3rem;
+        align-items  : center;
+        border       : 1px solid $colorDark;
+        border-radius: 0.3rem;
+    }
+
+    .item__btns {
+        flex-basis: 20%;
+        display   : flex;
+
+        .post__btn {
+            @include contentButton (10rem, 2rem, $colorLight, 1px solid transparent, $colorDark);
+        }
+    }
+
+}

@@ -1,0 +1,26 @@
+.form__container {
+    width     : 100%;
+    display   : flex;
+    margin-top: 2rem;
+
+    .form {
+        display       : flex;
+        flex-direction: column;
+        margin        : 0 auto;
+        align-items   : center;
+
+
+        .form__field {
+            display        : flex;
+            align-items    : center;
+            justify-content: space-between;
+
+            &-input {
+                width          : 100%;
+                display        : flex;
+                justify-content: space-between;
+                align-items    : center;
+            }
+        }
+    }
+}

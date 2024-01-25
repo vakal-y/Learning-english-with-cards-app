@@ -1,0 +1,90 @@
+[
+    {
+        "id": "14996",
+        "english": "infer",
+        "transcription": "[inˈfər]",
+        "russian": "сделать вывод",
+        "tags": "fgfgg",
+        "tags_json": "[\"fgfgg\"]"
+    },
+    {
+        "id": "15016",
+        "english": "apple",
+        "transcription": "[ывап]",
+        "russian": "яблоко",
+        "tags": "фрукты",
+        "tags_json": "[\"u0444u0440u0443u043au0442u044b\"]"
+    },
+    {
+        "id": "15060",
+        "english": "differ",
+        "transcription": " [ˈtrævl]",
+        "russian": "ручка",
+        "tags": "",
+        "tags_json": "[\"\"]"
+    },
+    {
+        "id": "15069",
+        "english": "travel",
+        "transcription": " [ˈtrævl]",
+        "russian": "путешествовать",
+        "tags": "",
+        "tags_json": "[]"
+    },
+    {
+        "id": "15078",
+        "english": "dog",
+        "transcription": "[dɒg]",
+        "russian": "собака ",
+        "tags": "животное",
+        "tags_json": "[\"u0436u0438u0432u043eu0442u043du043eu0435\"]"
+    },
+    {
+        "id": "15081",
+        "english": "corn",
+        "transcription": "[kɔːn]",
+        "russian": "кукуруза",
+        "tags": "продукты",
+        "tags_json": "[\"u043fu0440u043eu0434u0443u043au0442u044b\"]"
+    },
+    {
+        "id": "15083",
+        "english": "bread",
+        "transcription": "[br:ead]",
+        "russian": "хлеб, выпечка",
+        "tags": "продукты",
+        "tags_json": "[\"u043fu0440u043eu0434u0443u043au0442u044b\"]"
+    },
+    {
+        "id": "15084",
+        "english": "cloudy",
+        "transcription": "[ˈkloudē]",
+        "russian": "пасмурно, облачно",
+        "tags": "природа",
+        "tags_json": "[\"u043fu0440u0438u0440u043eu0434u0430\"]"
+    },
+    {
+        "id": "15087",
+        "english": "sun",
+        "transcription": "[вуапр]",
+        "russian": "солнце",
+        "tags": "природа",
+        "tags_json": "[\"u043fu0440u0438u0440u043eu0434u0430\"]"
+    },
+    {
+        "id": "15088",
+        "english": "tremendous",
+        "transcription": "[trəˈmendəs]",
+        "russian": "огромный",
+        "tags": "с1",
+        "tags_json": "[\"u04411\"]"
+    },
+    {
+        "id": "15089",
+        "english": "giant",
+        "transcription": "[ˈjīənt]",
+        "russian": "гигант",
+        "tags": "b1",
+        "tags_json": "[\"b1\"]"
+    }
+]

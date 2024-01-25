@@ -1,0 +1,13 @@
+@import '../style/vars';
+
+.footer_container {
+    position: fixed-bottom;
+    width   : 100vw;
+    height  : 7vh;
+
+    display        : flex;
+    justify-content: space-between;
+
+    background-color: $colorDark;
+    color           : $colorLight;
+}
