@@ -4,19 +4,22 @@ import './Cards.scss';
 import data from '/src/data.json';
 import arrowLeft from '/src/assets/arrow1-01.svg';
 import arrowRight from '/src/assets/arrow2-01.svg';
+import { gsap } from 'gsap';
 
 export default function Cards() {
     const [activeCardIndex, setActiveCardIndex] = useState(0);
+
     const handlePrevClick = () => {
-        setActiveCardIndex((prevIndex) =>
-            prevIndex - 1 < 0 ? data.length - 1 : prevIndex - 1
-        );
+        gsap.to('.card__animated-container', { x: '-100%', opacity: 0, duration: 0.5, onComplete: handleAnimationComplete });
     };
 
     const handleNextClick = () => {
-        setActiveCardIndex((prevIndex) =>
-            prevIndex + 1 >= data.length ? 0 : prevIndex + 1
-        );
+        gsap.to('.card__animated-container', { x: '100%', opacity: 0, duration: 0.5, onComplete: handleAnimationComplete });
+    };
+
+    const handleAnimationComplete = () => {
+        setActiveCardIndex((prevIndex) => (prevIndex + 1 >= data.length ? 0 : prevIndex + 1));
+        gsap.to('.card__animated-container', { x: '0%', opacity: 1, duration: 0.5 });
     };
 
     return (
@@ -26,10 +29,11 @@ export default function Cards() {
                     <button onClick={handlePrevClick} >
                         <img src={arrowLeft} alt='arrowLeft' />
                     </button></div>
-                <CreateCard item={data[activeCardIndex]} />
+                <div className='card__animated-container'>
+                    <CreateCard item={data[activeCardIndex]} />
+                </div>
                 <div className='arrow'><button
-                    onClick={handleNextClick}
-                >
+                    onClick={handleNextClick} >
                     <img src={arrowRight} alt='arrowRight' />
                 </button></div>
             </div>

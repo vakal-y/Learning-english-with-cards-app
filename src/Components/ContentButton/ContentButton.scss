@@ -2,5 +2,5 @@
 @import '/src/Components/style/vars';
 
 .content__button {
-    @include contentButton (9rem, 2.2rem, $colorLight, 2px solid $colorLight, $colorDark);
+    @include contentButton (9rem, 2.2rem, $colorLight, 1px solid $colorLight, $colorDark);
 }
