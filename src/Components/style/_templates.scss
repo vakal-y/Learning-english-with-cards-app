@@ -3,7 +3,7 @@
     height: $height;
 
     position: relative;
-
+    z-index : 2;
 
     display        : flex;
     justify-content: space-around;
@@ -18,8 +18,27 @@
     cursor          : pointer;
     transition      : all .35s;
 
+    &:hover {
+        color: #fff;
+    }
 
+    &::after {
+        position  : absolute;
+        content   : "";
+        top       : 0;
+        left      : 0;
+        width     : 0;
+        height    : 100%;
+        background: rgba(245, 79, 228, 1);
+        transition: all 0.35s;
+        z-index   : 2;
+        color     : #fff;
+    }
 
+    &:hover::after {
+        width: 100%;
+        color: #fff;
+    }
 
     @content;
 }
