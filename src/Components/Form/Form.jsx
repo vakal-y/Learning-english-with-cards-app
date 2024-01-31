@@ -13,6 +13,11 @@ export default function Form({ words, setWord }) {
     const addNewWord = (e) => {
         e.preventDefault();
 
+        if (!english || !transcription || !russian) {
+            alert("Заполните пустые поля!");
+            return;
+        }
+
         setWord([...words, { id: Date.now(), english, transcription, russian }]);
         setEnglish('');
         setTranscription('');

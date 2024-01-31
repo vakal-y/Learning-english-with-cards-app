@@ -1,7 +1,6 @@
 import React, { useState, useEffect, forwardRef } from "react";
 import './CheckButton.scss';
 
-// Используем forwardRef для передачи ref
 const CheckButton = forwardRef(({ item, onViewTranslation }, ref) => {
     const [pressed, setPressed] = useState(false);
 
