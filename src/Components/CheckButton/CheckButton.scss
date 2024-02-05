@@ -3,6 +3,11 @@
 
 .check__button {
     @include contentButton (10rem, 2.2rem, $colorLight, 1.5px solid transparent, $colorDark);
+
+    .button__text {
+        position: relative;
+        z-index : 3;
+    }
 }
 
 .checked__button {

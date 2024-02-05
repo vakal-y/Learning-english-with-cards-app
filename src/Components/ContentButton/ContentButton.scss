@@ -3,5 +3,10 @@
 
 .content__button {
     @include contentButton (9rem, 2.2rem, $colorLight, 1px solid $colorLight, $colorDark);
-    z-index: 3;
+
+    .button__text {
+        position: relative;
+        z-index : 3;
+    }
+
 }

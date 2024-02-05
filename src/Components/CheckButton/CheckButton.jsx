@@ -25,7 +25,7 @@ const CheckButton = forwardRef(({ item, onViewTranslation }, ref) => {
             className={`check__button ${pressed ? 'checked__button' : ''}`}
             onClick={handleChange}
         >
-            {pressed ? item.russian : 'Перевод'}
+            <span className="button__text">{pressed ? item.russian : 'Перевод'}</span>
         </button>
     );
 });
