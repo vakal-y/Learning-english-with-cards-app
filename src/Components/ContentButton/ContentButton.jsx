@@ -1,6 +1,7 @@
 import './ContentButton.scss';
 
 export default function ContentButton(props) {
+    // вызов функции, переданной через props.onClick
     const handleClick = () => {
         if (props.onClick) {
             props.onClick();

@@ -48,6 +48,7 @@ export default function PostItem(props) {
     return (
         <div className='post__item' ref={props.nodeRef}>
             {isEditing ? (
+                // если включен режим редактирования, отображаем инпуты для редактирования
                 <>
                     <input
                         className='item'
@@ -70,6 +71,7 @@ export default function PostItem(props) {
                     </div>
                 </>
             ) : (
+                // если режим редактирования выключен, отображаем данные и кнопку "Редактировать"
                 <>
                     <div className='item'>{props.word.english}</div>
                     <div className='item'>{props.word.transcription}</div>

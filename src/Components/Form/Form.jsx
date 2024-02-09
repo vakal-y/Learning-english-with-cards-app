@@ -6,19 +6,23 @@ import MyInput from '../myInput/MyInput';
 
 
 export default function Form({ words, setWord }) {
+    // состояния для управления вводом данных
     const [english, setEnglish] = useState('');
     const [transcription, setTranscription] = useState('');
     const [russian, setRussian] = useState('');
 
+    // обработчик для добавления нового слова
     const addNewWord = (e) => {
         e.preventDefault();
 
+        // проверка наличия введенных данных перед добавлением
         if (!english || !transcription || !russian) {
             alert("Заполните пустые поля!");
             return;
         }
-
+        // добавление нового слова в массив слов
         setWord([...words, { id: Date.now(), english, transcription, russian }]);
+        // сброс состояний для очистки инпутов после добавления
         setEnglish('');
         setTranscription('');
         setRussian('');

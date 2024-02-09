@@ -5,15 +5,17 @@ import data from '/src/data.json';
 import './ListOfWords.scss'
 
 export default function ListOfWords() {
+    // состояние, хранящее массив слов
     const [word, setWord] = useState(data);
 
+    // функция для удаления слова по его идентификатору
     const handleDeleteWord = (id) => {
+        // обновление состояния, исключая удаленное слово
         setWord((prevWords) => prevWords.filter((word) => word.id !== id));
     };
 
     const handleEditWord = (id) => {
-        console.log("Edit word with ID:", id);
-        // здесь наверное будет всплывать модальное окно которого нет
+        // пустая функция, без которой почему-то не работает ничегооо
     };
 
     return (

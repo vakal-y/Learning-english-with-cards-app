@@ -18,7 +18,7 @@ const CheckButton = forwardRef(({ item, onViewTranslation }, ref) => {
         }
     }, [item, ref]);
 
-
+    // обработчик изменения состояния (перевода) слова
     const handleChange = () => {
         setPressed(!pressed);
         // вызов onViewTranslation только если слово ещё не было засчитано
