@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContentButton from '../ContentButton/ContentButton';
 import './PostItem.scss';
 
@@ -12,7 +12,17 @@ export default function PostItem(props) {
             transcription: props.word.transcription,
             russian: props.word.russian
         }
-    )
+    );
+
+    // состояние для отслеживания заполненности полей
+    const [isFieldsFilled, setIsFieldsFilled] = useState(true);
+
+    useEffect(() => {
+        // Проверяем, есть ли хотя бы одно пустое поле
+        const isEmpty = Object.values(editedWord).some((value) => !value);
+        setIsFieldsFilled(!isEmpty);
+    }, [editedWord]);
+
     // обработчик для удаления элемента
     const handleDelete = () => {
         props.onDelete(props.word.id);
@@ -25,8 +35,14 @@ export default function PostItem(props) {
 
     // сохранение изменений и выход из режима редактирования
     const handleSave = () => {
-        props.onEdit(props.word.id, editedWord);
-        setIsEditing(false);
+        if (isFieldsFilled) { // если поля заполнены
+            props.onEdit(props.word.id, editedWord);
+            setIsEditing(false);
+            console.log(editedWord);
+        } else {
+            // если поля не заполнены
+            console.log('Необходимо заполнить все поля');
+        }
     };
 
     // отмена изменений и выход из режима редактирования
@@ -51,23 +67,30 @@ export default function PostItem(props) {
                 // если включен режим редактирования, отображаем инпуты для редактирования
                 <>
                     <input
-                        className='item'
+                        className={`item ${!editedWord.english ? 'error' : ''}`}
                         value={editedWord.english}
                         onChange={(e) => handleChange('english', e.target.value)}
                     />
                     <input
-                        className='item'
+                        className={`item ${!editedWord.transcription ? 'error' : ''}`}
                         value={editedWord.transcription}
                         onChange={(e) => handleChange('transcription', e.target.value)}
                     />
                     <input
-                        className='item'
+                        className={`item ${!editedWord.russian ? 'error' : ''}`}
                         value={editedWord.russian}
                         onChange={(e) => handleChange('russian', e.target.value)}
                     />
                     <div className='item__btns'>
-                        <ContentButton className='post__btn' name='Сохранить' onClick={handleSave} />
-                        <ContentButton className='post__btn' name='Отмена' onClick={handleCancel} />
+                        <ContentButton
+                            className={`post__btn ${!isFieldsFilled ? 'error' : ''}`}
+                            name='Сохранить'
+                            onClick={handleSave}
+                            disabled={!isFieldsFilled} />
+                        <ContentButton
+                            className='post__btn'
+                            name='Отмена'
+                            onClick={handleCancel} />
                     </div>
                 </>
             ) : (

@@ -16,6 +16,10 @@
         align-items  : center;
         border       : 1px solid $colorDark;
         border-radius: 0.3rem;
+
+        &.error {
+            border: 1px solid red;
+        }
     }
 
     .item__btns {
@@ -24,7 +28,22 @@
 
         .post__btn {
             @include contentButton (10rem, 2rem, $colorLight, 1px solid transparent, $colorDark);
+
+            &.error {
+                @include contentButton (10rem, 2rem, $colorDark, 1px solid transparent, $colorGrey);
+
+                &:hover {
+                    background-color: $colorGrey;
+                }
+
+                &:disabled {
+                    background-color: $colorGrey;
+                    color           : $colorDark;
+                    border          : 1px solid transparent;
+                    cursor          : not-allowed;
+                    pointer-events  : none;
+                }
+            }
         }
     }
-
 }
