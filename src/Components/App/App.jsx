@@ -1,6 +1,6 @@
 import Header from '../Header/Header';
 import Cards from '../Cards/Cards';
-import Main from './Main/Main';
+import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.scss'
