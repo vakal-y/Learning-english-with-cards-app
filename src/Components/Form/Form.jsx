@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import ContentButton from '../ContentButton/ContentButton';
 import './Form.scss';
 import '/src/Components/CheckButton/CheckButton.scss';
 import MyInput from '../myInput/MyInput';
+import { MyContext } from '../Context/MyContext';
 
 
 export default function Form({ words, setWord }) {
+    const { dataServer, setDataServer } = useContext(MyContext);
+
     // состояния для управления вводом данных
     const [english, setEnglish] = useState('');
     const [transcription, setTranscription] = useState('');
@@ -21,7 +24,7 @@ export default function Form({ words, setWord }) {
             return;
         }
         // добавление нового слова в массив слов
-        setWord([...words, { id: Date.now(), english, transcription, russian }]);
+        setDataServer([...dataServer, { id: Date.now(), english, transcription, russian }]);
         // сброс состояний для очистки инпутов после добавления
         setEnglish('');
         setTranscription('');

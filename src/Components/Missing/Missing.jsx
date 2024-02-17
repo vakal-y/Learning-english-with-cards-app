@@ -7,7 +7,7 @@ export default function Missing() {
         <div className="missing__container">
             <h1>404</h1>
             <h2>not found</h2>
-            <Link path='/'><ContentButton name='Go h[əʊ]me?' /></Link>
+            <Link to='/'><ContentButton name='Go h[əʊ]me?' /></Link>
         </div>
     )
 }

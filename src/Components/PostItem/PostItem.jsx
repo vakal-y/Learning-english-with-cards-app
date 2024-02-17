@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ContentButton from '../ContentButton/ContentButton';
 import './PostItem.scss';
-import { MyContext } from '../Context/MyContext';
-import { useContext } from 'react';
 
 export default function PostItem(props) {
-    const { setDataServer, DataServer } = useContext(MyContext);
-
     // состояние для отслеживания режима редактирования
     const [isEditing, setIsEditing] = useState(false);
     // состояние для временного хранения редактируемых данных
