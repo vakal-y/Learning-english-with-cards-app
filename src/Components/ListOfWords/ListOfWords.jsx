@@ -3,6 +3,7 @@ import PostWord from "../PostWord/PostWord";
 import { useState } from "react";
 import data from '/src/data.json';
 import './ListOfWords.scss'
+import GET from "../../GET";
 
 export default function ListOfWords() {
     // состояние, хранящее массив слов
