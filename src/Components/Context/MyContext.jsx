@@ -7,17 +7,17 @@ export const MyContext = createContext(); // хранилище, куда скл
 // создание универсального компонента
 export function MyContextComponent({ children }) {
     const [dataServer, setDataServer] = useState(false);
-    const value = { dataServer, setDataServer }; // данные, которые будут храниться в контексте - данные с сервера и функция-апдейтер
+    const value = { dataServer, setDataServer, updateWord }; // данные, которые будут храниться в контексте - данные с сервера и функция-апдейтер
 
     // useEffect(() => {
     //     getWordsServer();
     // }, []); // [] означает, что эффект будет вызван только при монтировании компонента
 
     useEffect(() => {
-        // имитация задержки в 2 секунды перед получением данных
+        // имитация задержки в 2 секунды перед получением данных (чтобы посмотреть прелоадер)
         const delay = setTimeout(() => {
             getWordsServer();
-        }, 5000);
+        }, 3000);
 
         // очистка таймаута при размонтировании компонента
         return () => clearTimeout(delay);
@@ -30,6 +30,16 @@ export function MyContextComponent({ children }) {
         } catch (error) {
             console.error('Error fetching data from the server:', error);
             setDataServer([]); // данные по умолчанию в случае ошибки
+        }
+    }
+
+    async function updateWord(id, updatedData) {
+        try {
+            const resp = await GET.updateWord(id, updatedData);
+            console.log(resp);
+            getWordsServer(); // загружаю обновленные данные после успешного обновления
+        } catch (error) {
+            console.error('Error updating word:', error);
         }
     }
 
