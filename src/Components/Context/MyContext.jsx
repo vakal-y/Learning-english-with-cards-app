@@ -9,19 +9,9 @@ export function MyContextComponent({ children }) {
     const [dataServer, setDataServer] = useState(false);
     const value = { dataServer, setDataServer, updateWord }; // данные, которые будут храниться в контексте - данные с сервера и функция-апдейтер
 
-    // useEffect(() => {
-    //     getWordsServer();
-    // }, []); // [] означает, что эффект будет вызван только при монтировании компонента
-
     useEffect(() => {
-        // имитация задержки в 2 секунды перед получением данных (чтобы посмотреть прелоадер)
-        const delay = setTimeout(() => {
-            getWordsServer();
-        }, 3000);
-
-        // очистка таймаута при размонтировании компонента
-        return () => clearTimeout(delay);
-    }, []);
+        getWordsServer();
+    }, []); // [] означает, что эффект будет вызван только при монтировании компонента
 
     async function getWordsServer() {
         try {

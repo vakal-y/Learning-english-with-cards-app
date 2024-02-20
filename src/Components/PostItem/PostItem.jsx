@@ -4,7 +4,7 @@ import './PostItem.scss';
 import { MyContext } from '../Context/MyContext';
 
 export default function PostItem(props) {
-    const { updateWord } = useContext(MyContext);
+    const { updateWord, setDataServer } = useContext(MyContext);
     // состояние для отслеживания режима редактирования
     const [isEditing, setIsEditing] = useState(false);
     // состояние для временного хранения редактируемых данных
@@ -42,6 +42,13 @@ export default function PostItem(props) {
         try {
             // (вызов на сервер) вызов метода updateWord с передачей идентификатора и обновленных данных
             await updateWord(props.word.id, editedWord);
+            // если успешно, обновляю данные только для текущего слова
+            setDataServer(prevData => {
+                const newData = prevData.map(word =>
+                    word.id === props.word.id ? { ...word, ...editedWord } : word
+                );
+                return newData;
+            });
 
             // если успешно, завершаю редактирование
             setIsEditing(false);
@@ -49,7 +56,6 @@ export default function PostItem(props) {
             setError(null);
         } catch (error) {
             console.error('Ошибка при обновлении слова:', error);
-            getWordsServer(); // откатываю изменения
             // сохраняю ошибку в состоянии
             setError(`Ошибка при обновлении слова: ${error.message}`);
         }
