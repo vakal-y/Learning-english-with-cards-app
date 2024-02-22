@@ -41,7 +41,7 @@ export default function PostItem(props) {
         try {
             // (вызов на сервер) вызов метода updateWord с передачей идентификатора и обновленных данных
             await updateWord(props.word.id, editedWord);
-            props.onEdit(props.word.id, editedWord, props.getWordsServer); // вызываю функцию из ListOfWords
+            props.onEdit(props.word.id, editedWord); // вызываю функцию из ListOfWords
             setIsEditing(false); // если успешно, завершаю редактирование
             setError(null); // сбрасываю ошибку в случае успеха
         } catch (error) {

@@ -7,31 +7,32 @@ export const MyContext = createContext(); // хранилище, куда скл
 // создание универсального компонента
 export function MyContextComponent({ children }) {
     const [dataServer, setDataServer] = useState(false);
-    const value = { dataServer, setDataServer, updateWord }; // данные, которые будут храниться в контексте - данные с сервера и функция-апдейтер
+    const getWordsServer = async () => {
+        try {
+            const wordsServer = await GET.getWords();
+            setDataServer(wordsServer);
+        } catch (error) {
+            console.error('Error fetching data from the server:', error);
+            setDataServer([]);
+        }
+    };
+
+    const updateWord = async (id, updatedData) => {
+        try {
+            const resp = await GET.updateWord(id, updatedData);
+            console.log(resp);
+            getWordsServer();
+        } catch (error) {
+            console.error('Error updating word:', error);
+        }
+    };
+
+    const value = { dataServer, setDataServer, updateWord, getWordsServer }; // данные, которые будут храниться в контексте - данные с сервера и функция-апдейтер
 
     useEffect(() => {
         getWordsServer();
     }, []); // [] означает, что эффект будет вызван только при монтировании компонента
 
-    async function getWordsServer() {
-        try {
-            const wordsServer = await GET.getWords(); // вызываю метод из класса GET
-            setDataServer(wordsServer);
-        } catch (error) {
-            console.error('Error fetching data from the server:', error);
-            setDataServer([]); // данные по умолчанию в случае ошибки
-        }
-    }
-
-    async function updateWord(id, updatedData) {
-        try {
-            const resp = await GET.updateWord(id, updatedData);
-            console.log(resp);
-            getWordsServer(); // загружаю обновленные данные после успешного обновления
-        } catch (error) {
-            console.error('Error updating word:', error);
-        }
-    }
 
     if (!dataServer) {
         return (

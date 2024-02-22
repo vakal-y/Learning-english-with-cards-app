@@ -5,7 +5,7 @@ import { MyContext } from '../Context/MyContext';
 import './ListOfWords.scss';
 
 export default function ListOfWords() {
-    const { dataServer, setDataServer, updateWord } = useContext(MyContext);
+    const { dataServer, setDataServer, updateWord, getWordsServer } = useContext(MyContext);
 
     // функция для удаления слова по его идентификатору
     const handleDeleteWord = (id) => {
