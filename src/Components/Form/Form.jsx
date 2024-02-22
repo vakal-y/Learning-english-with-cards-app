@@ -6,8 +6,8 @@ import MyInput from '../myInput/MyInput';
 import { MyContext } from '../Context/MyContext';
 
 
-export default function Form({ words, setWord }) {
-    const { dataServer, setDataServer } = useContext(MyContext);
+export default function Form() {
+    const { dataServer, setDataServer, addWord } = useContext(MyContext);
 
     // состояния для управления вводом данных
     const [english, setEnglish] = useState('');
@@ -15,7 +15,7 @@ export default function Form({ words, setWord }) {
     const [russian, setRussian] = useState('');
 
     // обработчик для добавления нового слова
-    const addNewWord = (e) => {
+    const addNewWord = async (e) => {
         e.preventDefault();
 
         // проверка наличия введенных данных перед добавлением
@@ -23,12 +23,16 @@ export default function Form({ words, setWord }) {
             alert("Заполните пустые поля!");
             return;
         }
-        // добавление нового слова в массив слов
-        setDataServer([...dataServer, { id: Date.now(), english, transcription, russian }]);
-        // сброс состояний для очистки инпутов после добавления
-        setEnglish('');
-        setTranscription('');
-        setRussian('');
+        try {
+            // добавление нового слова на сервер
+            await addWord({ english, transcription, russian });
+            // сброс состояний для очистки инпутов после добавления
+            setEnglish('');
+            setTranscription('');
+            setRussian('');
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
@@ -56,7 +60,7 @@ export default function Form({ words, setWord }) {
                             placeholder='russian'
                         />
                     </div>
-                    <ContentButton name='Добавить' />
+                    <ContentButton name='Добавить' onClick={(e) => addNewWord(e)} />
                 </div>
             </form>
         </div>

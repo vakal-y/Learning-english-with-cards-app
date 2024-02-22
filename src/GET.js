@@ -26,6 +26,28 @@ class GET {
             return false;
         }
     }
+
+    static async addWord(newData) {
+        try {
+            console.log(newData);
+
+            const resp = await fetch('/api/words', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newData),
+            });
+
+            console.log(resp);
+
+            const data = await resp.json();
+            return data;
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
 }
 
 export default GET

@@ -12,7 +12,7 @@ export function MyContextComponent({ children }) {
             const wordsServer = await GET.getWords();
             setDataServer(wordsServer);
         } catch (error) {
-            console.error('Error fetching data from the server:', error);
+            console.error(error);
             setDataServer([]);
         }
     };
@@ -23,11 +23,22 @@ export function MyContextComponent({ children }) {
             console.log(resp);
             getWordsServer();
         } catch (error) {
-            console.error('Error updating word:', error);
+            console.error(error);
         }
     };
 
-    const value = { dataServer, setDataServer, updateWord, getWordsServer }; // данные, которые будут храниться в контексте - данные с сервера и функция-апдейтер
+    const addWord = async (newData) => {
+        try {
+            console.log(newData);
+            const resp = await GET.addWord(newData);
+            console.log(resp);
+            getWordsServer();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const value = { dataServer, setDataServer, updateWord, getWordsServer, addWord }; // данные, которые будут храниться в контексте - данные с сервера и функция-апдейтер
 
     useEffect(() => {
         getWordsServer();
