@@ -18,9 +18,8 @@ class GET {
                 },
                 body: JSON.stringify(updatedData),
             })
-            console.log(resp);;
+            console.log(resp);
             const data = await resp.json();
-            console.log('Данные:', data);
             return data;
         } catch (e) {
             console.error(e);

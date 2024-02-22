@@ -1,20 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Form from "../Form/Form";
 import PostWord from "../PostWord/PostWord";
 import { MyContext } from '../Context/MyContext';
 import './ListOfWords.scss';
 
 export default function ListOfWords() {
-    const { dataServer, setDataServer } = useContext(MyContext);
+    const { dataServer, setDataServer, updateWord } = useContext(MyContext);
 
     // функция для удаления слова по его идентификатору
     const handleDeleteWord = (id) => {
-        // обновление состояния, исключая удаленное слово
-        setDataServer((prevData) => prevData.filter((word) => word.id !== id));
+        setDataServer((prevData) => prevData.filter((word) => word.id !== id)); // обновление состояния, исключая удаленное слово
     };
 
-    const handleEditWord = (id, updatedData) => {
-        // пустая функция, без которой почему-то не работает ничегооо
+    const handleEditWord = async (id, updatedData) => {
+        try {
+            await updateWord(id, updatedData);
+            getWordsServer();
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (

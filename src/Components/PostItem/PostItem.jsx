@@ -22,8 +22,7 @@ export default function PostItem(props) {
     const [isFieldsFilled, setIsFieldsFilled] = useState(true);
 
     useEffect(() => {
-        // проверяю, есть ли хотя бы одно пустое поле
-        const isEmpty = Object.values(editedWord).some((value) => !value);
+        const isEmpty = Object.values(editedWord).some((value) => !value); // проверяю, есть ли хотя бы одно пустое поле
         setIsFieldsFilled(!isEmpty);
     }, [editedWord]);
 
@@ -42,22 +41,12 @@ export default function PostItem(props) {
         try {
             // (вызов на сервер) вызов метода updateWord с передачей идентификатора и обновленных данных
             await updateWord(props.word.id, editedWord);
-            // если успешно, обновляю данные только для текущего слова
-            setDataServer(prevData => {
-                const newData = prevData.map(word =>
-                    word.id === props.word.id ? { ...word, ...editedWord } : word
-                );
-                return newData;
-            });
-
-            // если успешно, завершаю редактирование
-            setIsEditing(false);
-            // сбрасываю ошибку в случае успеха
-            setError(null);
+            props.onEdit(props.word.id, editedWord, props.getWordsServer); // вызываю функцию из ListOfWords
+            setIsEditing(false); // если успешно, завершаю редактирование
+            setError(null); // сбрасываю ошибку в случае успеха
         } catch (error) {
             console.error('Ошибка при обновлении слова:', error);
-            // сохраняю ошибку в состоянии
-            setError(`Ошибка при обновлении слова: ${error.message}`);
+            setError(`Ошибка при обновлении слова: ${error.message}`); // сохраняю ошибку в состоянии
         }
     };
 
