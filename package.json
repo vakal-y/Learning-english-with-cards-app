@@ -9,16 +9,6 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
-  "proxy": {
-    "/search": {
-      "target": "https://www.google.com",
-      "changeOrigin": true
-    },
-    "/api": {
-      "target": "http://itgirlschool.justmakeit.ru",
-      "changeOrigin": true
-    }
-  },
   "dependencies": {
     "gsap": "^3.12.5",
     "react": "^18.2.0",
