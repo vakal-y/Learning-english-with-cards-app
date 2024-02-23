@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const wordSlice = createSlice({
     name: 'word',
     initialState: {
-        words: [] // начальное состояние - пустой массив
+        words: [], // начальное состояние - пустой массив
+        activeCardIndex: 0,
     },
     reducers: {
         // установка слова в состоянии хранилища
@@ -27,9 +28,13 @@ const wordSlice = createSlice({
         removeWord(state, action) {
             state.words = state.words.filter(word => word.id !== action.payload); // оставляю в массиве слова, не равные id удаляемого слова
         },
+
+        setActiveCardIndex(state, action) {
+            state.activeCardIndex = action.payload;
+        },
     }
 });
 // экспортирую action creators
-export const { setWords, addWord, editWord, removeWord } = wordSlice.actions;
+export const { setWords, addWord, editWord, removeWord, setActiveCardIndex } = wordSlice.actions;
 // экспортирую редюсер
 export default wordSlice.reducer;

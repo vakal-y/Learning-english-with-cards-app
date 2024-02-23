@@ -3,13 +3,12 @@ import ContentButton from '../ContentButton/ContentButton';
 import './Form.scss';
 import '/src/Components/CheckButton/CheckButton.scss';
 import MyInput from '../myInput/MyInput';
+import { useSelector, useDispatch } from 'react-redux';
 
 
-export default function Form({ words, setWord }) {
-    // состояния для управления вводом данных
-    const [english, setEnglish] = useState('');
-    const [transcription, setTranscription] = useState('');
-    const [russian, setRussian] = useState('');
+export default function Form() {
+    const dispatch = useDispatch();
+    const words = useSelector((state) => state.word.words);
 
     // обработчик для добавления нового слова
     const addNewWord = (e) => {
@@ -20,12 +19,16 @@ export default function Form({ words, setWord }) {
             alert("Заполните пустые поля!");
             return;
         }
-        // добавление нового слова в массив слов
-        setWord([...words, { id: Date.now(), english, transcription, russian }]);
-        // сброс состояний для очистки инпутов после добавления
-        setEnglish('');
-        setTranscription('');
-        setRussian('');
+
+        // диспетчеризация добавления нового слова в Redux store
+        dispatch(
+            addWord({
+                id: Date.now(),
+                english,
+                transcription,
+                russian,
+            })
+        );
     }
 
     return (

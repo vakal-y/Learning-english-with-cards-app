@@ -5,12 +5,14 @@ import data from '/src/data.json';
 import arrowLeft from '/src/assets/arrow1-01.svg';
 import arrowRight from '/src/assets/arrow2-01.svg';
 import { gsap } from 'gsap';
+import { useDispatch, useSelector } from "react-redux";
+import { setWordsLearned } from '../../store/slice/wordsLearnedSlice';
+import { setActiveCardIndex } from '../../store/slice/wordReducer';
 
 export default function Cards() {
-    // состояние для отслеживания индекса активной карточки
-    const [activeCardIndex, setActiveCardIndex] = useState(0);
-    // состояние для отслеживания количества выученных слов
-    const [wordsLearned, setWordsLearned] = useState(0);
+    const dispatch = useDispatch();
+    const activeCardIndex = useSelector(state => state.word.activeCardIndex);
+    const wordsLearned = useSelector(state => state.word.wordsLearned);
 
     // обработчик для переключения на предыдущую карточку
     const handlePrevClick = () => {
@@ -24,13 +26,13 @@ export default function Cards() {
 
     // обработчик, вызываемый после завершения анимации переключения карточек
     const handleAnimationComplete = () => {
-        setActiveCardIndex((prevIndex) => (prevIndex + 1 >= data.length ? 0 : prevIndex + 1));
+        dispatch(setActiveCardIndex((prevIndex) => (prevIndex + 1 >= data.length ? 0 : prevIndex + 1)));
         gsap.to('.card__animated-container', { x: '0%', opacity: 1, duration: 0.5 });
     };
 
     // обработчик для увеличения счетчика выученных слов
     const handleViewTranslation = () => {
-        setWordsLearned((prevCount) => prevCount + 1);
+        dispatch(setWordsLearned((prevCount) => prevCount + 1));
     };
 
     return (

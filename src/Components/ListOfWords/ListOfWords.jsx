@@ -11,9 +11,21 @@ export default function ListOfWords() {
     const words = useSelector(state => state.word.words); // получение данных из Redux store 
 
     useEffect(() => {
-        // Здесь вы можете использовать ваш запрос на сервер для получения данных
-        // и передать их в store с помощью action creator setWords
-        // dispatch(setWords(yourDataFromServer));
+        const getData = async () => {
+            try {
+                const response = await fetch('/api/words');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data from the server');
+                }
+
+                const data = await response.json();
+                dispatch(setWords(data)); // отправка действия setWords в Redux store
+            } catch (e) {
+                console.error(e);
+            }
+        };
+
+        getData();
     }, [dispatch]);
 
     // функция для удаления слова по его идентификатору
