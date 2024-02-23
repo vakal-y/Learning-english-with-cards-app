@@ -1,27 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// создаю срез (slice) с именем 'word'
 const wordSlice = createSlice({
-    name: word,
+    name: 'word',
     initialState: {
-        english: null,
-        transcription: null,
-        russian: null,
-        id: null
+        words: [] // начальное состояние - пустой массив
     },
     reducers: {
+        // установка слова в состоянии хранилища
         setWords(state, action) {
-            state.english = action.payload.english
-            state.transcription = action.payload.transcription
-            state.russian = action.payload.russian
-            state.id = action.payload.id
+            state.words = action.payload;
         },
-        removeWord(state) {
-            state.english = null
-            state.transcription = null
-            state.russian = null
-            state.id = null
-        }
+        // добавление слова
+        addWord(state, action) {
+            state.push(action.payload); // добавляю новое слово в массив состояния
+        },
+        // редактирование слова
+        editWord(state, action) {
+            const { id, updatedWord } = action.payload; // получаю id и обновленные данные из action
+            const index = state.words.findIndex(word => word.id === id);
+            if (index !== -1) {
+                state.words[index] = updatedWord;
+            }
+        },
+        // удаление слова
+        removeWord(state, action) {
+            state.words = state.words.filter(word => word.id !== action.payload); // оставляю в массиве слова, не равные id удаляемого слова
+        },
     }
 });
-export const { setWords, removeWord } = wordSlice.actions;
+// экспортирую action creators
+export const { setWords, addWord, editWord, removeWord } = wordSlice.actions;
+// экспортирую редюсер
 export default wordSlice.reducer;

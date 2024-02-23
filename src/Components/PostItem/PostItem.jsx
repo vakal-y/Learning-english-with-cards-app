@@ -1,31 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import ContentButton from '../ContentButton/ContentButton';
 import './PostItem.scss';
+import { useDispatch } from 'react-redux';
+import { editWord, removeWord } from '../../slice/wordSlice';
 
 export default function PostItem(props) {
-    // состояние для отслеживания режима редактирования
-    const [isEditing, setIsEditing] = useState(false);
-    // состояние для временного хранения редактируемых данных
-    const [editedWord, setEditedWord] = useState(
+    const dispatch = useDispatch(); // инициализация функции dispatch
+
+    const [isEditing, setIsEditing] = useState(false); // состояние для отслеживания режима редактирования
+    const [editedWord, setEditedWord] = useState( // состояние для временного хранения редактируемых данных
         {
             english: props.word.english,
             transcription: props.word.transcription,
             russian: props.word.russian
         }
     );
+    const [isFieldsFilled, setIsFieldsFilled] = useState(true); // состояние для отслеживания заполненности полей
 
-    // состояние для отслеживания заполненности полей
-    const [isFieldsFilled, setIsFieldsFilled] = useState(true);
-
-    useEffect(() => {
-        // Проверяем, есть ли хотя бы одно пустое поле
+    useEffect(() => { // проверяю, есть ли хотя бы одно пустое поле
         const isEmpty = Object.values(editedWord).some((value) => !value);
         setIsFieldsFilled(!isEmpty);
     }, [editedWord]);
 
     // обработчик для удаления элемента
     const handleDelete = () => {
-        props.onDelete(props.word.id);
+        dispatch(removeWord(props.word.id)); // отправка действия removeWord с использованием функции dispatch
     };
 
     // включение режима редактирования
@@ -36,9 +35,9 @@ export default function PostItem(props) {
     // сохранение изменений и выход из режима редактирования
     const handleSave = () => {
         if (isFieldsFilled) { // если поля заполнены
-            props.onEdit(props.word.id, editedWord);
-            setIsEditing(false);
-            console.log(editedWord);
+            dispatch(editWord({ id: props.word.id, updatedWord: editedWord })); // отправка действия editWord с использованием функции dispatch
+            setIsEditing(false); // закрываю режим редактирования
+            console.log(editedWord); // вывожу данные в консоль
         } else {
             // если поля не заполнены
             console.log('Необходимо заполнить все поля');
