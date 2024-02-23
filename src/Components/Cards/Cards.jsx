@@ -32,7 +32,8 @@ export default function Cards() {
 
     // обработчик для увеличения счетчика выученных слов
     const handleViewTranslation = () => {
-        dispatch(setWordsLearned((prevCount) => prevCount + 1));
+        dispatch(setWordsLearned());
+        console.log('Количество выученных слов:', wordsLearned);
     };
 
     return (

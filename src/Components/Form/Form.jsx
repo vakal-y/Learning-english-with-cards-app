@@ -45,7 +45,7 @@ export default function Form() {
         };
 
         try {
-            await fetch('ваш_эндпоинт_для_создания_слова', {
+            await fetch('/api/words', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
