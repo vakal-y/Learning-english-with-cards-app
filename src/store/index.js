@@ -5,6 +5,6 @@ import wordsLearnedSlice from "./slice/wordsLearnedSlice";
 export const store = configureStore({
     reducer: {
         word: wordReducer,
-        wordsLearned: wordsLearnedReducer
+        wordsLearned: wordsLearnedSlice
     }
 })

@@ -1,18 +1,25 @@
-import { useState } from 'react';
 import ContentButton from '../ContentButton/ContentButton';
 import './Form.scss';
 import '/src/Components/CheckButton/CheckButton.scss';
-import MyInput from '../myInput/MyInput';
+import MyInput from '../MyInput/MyInput';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { addWord } from '../../store/slice/wordReducer';
+import { setActiveCardIndex } from '../../store/slice/wordReducer';
 
 
 export default function Form() {
     const dispatch = useDispatch();
-    const words = useSelector((state) => state.word.words);
+
+    const [english, setEnglish] = useState('');
+    const [transcription, setTranscription] = useState('');
+    const [russian, setRussian] = useState('');
+
 
     // обработчик для добавления нового слова
-    const addNewWord = (e) => {
+    const addNewWord = async (e) => {
         e.preventDefault();
+
 
         // проверка наличия введенных данных перед добавлением
         if (!english || !transcription || !russian) {
@@ -29,6 +36,33 @@ export default function Form() {
                 russian,
             })
         );
+
+        // Опционально: добавление логики для отправки данных на сервер
+        const wordData = {
+            english,
+            transcription,
+            russian,
+        };
+
+        try {
+            await fetch('ваш_эндпоинт_для_создания_слова', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(wordData),
+            });
+
+            // Опционально: добавление логики для обновления списка слов из сервера
+            dispatch(fetchWords());
+        } catch (error) {
+            console.error('Ошибка при отправке данных на сервер:', error);
+        }
+
+
+        setEnglish('');
+        setTranscription('');
+        setRussian('');
     }
 
     return (

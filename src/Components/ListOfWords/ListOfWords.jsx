@@ -1,10 +1,9 @@
 import Form from "../Form/Form";
 import PostWord from "../PostWord/PostWord";
-import { useState } from "react";
-import data from '/src/data.json';
 import './ListOfWords.scss'
+import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { setWords, addWord, removeWord, editWord } from '../../path-to-wordSlice';
+import { setWords, addWord, removeWord, editWord } from "../../store/slice/wordReducer";
 
 export default function ListOfWords() {
     const dispatch = useDispatch();
@@ -44,7 +43,7 @@ export default function ListOfWords() {
                 <Form addWord={newWord => dispatch(addWord(newWord))} />
             </div>
             <div className='post__word'>
-                {word.length
+                {words.length
                     ? < PostWord words={words} onDelete={handleDeleteWord} onEdit={handleEditWord} />
                     : <p className='warning'>Список пуст</p>
                 }

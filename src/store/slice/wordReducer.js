@@ -14,7 +14,7 @@ const wordSlice = createSlice({
         },
         // добавление слова
         addWord(state, action) {
-            state.push(action.payload); // добавляю новое слово в массив состояния
+            state.words.push(action.payload); // добавляю новое слово в массив состояния
         },
         // редактирование слова
         editWord(state, action) {

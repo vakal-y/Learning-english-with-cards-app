@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ContentButton from '../ContentButton/ContentButton';
 import './PostItem.scss';
 import { useDispatch } from 'react-redux';
-import { editWord, removeWord } from '../../slice/wordSlice';
+import { editWord, removeWord } from '../../store/slice/wordReducer';
 
 export default function PostItem(props) {
     const dispatch = useDispatch(); // инициализация функции dispatch
