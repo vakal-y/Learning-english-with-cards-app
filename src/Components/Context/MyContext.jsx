@@ -7,6 +7,7 @@ export const MyContext = createContext(); // хранилище, куда скл
 // создание универсального компонента
 export function MyContextComponent({ children }) {
     const [dataServer, setDataServer] = useState(false);
+
     const getWordsServer = async () => {
         try {
             const wordsServer = await GET.getWords();
@@ -36,9 +37,19 @@ export function MyContextComponent({ children }) {
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
-    const value = { dataServer, setDataServer, updateWord, getWordsServer, addWord }; // данные, которые будут храниться в контексте - данные с сервера и функция-апдейтер
+    const deleteWord = async (id) => {
+        try {
+            const resp = await GET.delWord(id);
+            console.log(resp);
+            getWordsServer();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const value = { dataServer, setDataServer, updateWord, getWordsServer, addWord, deleteWord }; // данные, которые будут храниться в контексте - данные с сервера и функция-апдейтер
 
     useEffect(() => {
         getWordsServer();

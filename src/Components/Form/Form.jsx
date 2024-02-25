@@ -2,12 +2,12 @@ import { useState, useContext } from 'react';
 import ContentButton from '../ContentButton/ContentButton';
 import './Form.scss';
 import '/src/Components/CheckButton/CheckButton.scss';
-import MyInput from '../myInput/MyInput';
+import MyInput from '../MyInput/MyInput';
 import { MyContext } from '../Context/MyContext';
 
 
 export default function Form() {
-    const { dataServer, setDataServer, addWord } = useContext(MyContext);
+    const { addWord } = useContext(MyContext);
 
     // состояния для управления вводом данных
     const [english, setEnglish] = useState('');

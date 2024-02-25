@@ -4,7 +4,7 @@ import './PostItem.scss';
 import { MyContext } from '../Context/MyContext';
 
 export default function PostItem(props) {
-    const { updateWord, setDataServer } = useContext(MyContext);
+    const { updateWord, deleteWord } = useContext(MyContext);
     // состояние для отслеживания режима редактирования
     const [isEditing, setIsEditing] = useState(false);
     // состояние для временного хранения редактируемых данных
@@ -12,7 +12,8 @@ export default function PostItem(props) {
         {
             english: props.word.english,
             transcription: props.word.transcription,
-            russian: props.word.russian
+            russian: props.word.russian,
+            tags: props.word.tags
         }
     );
     // состояние для отслеживания ошибок
@@ -25,11 +26,6 @@ export default function PostItem(props) {
         const isEmpty = Object.values(editedWord).some((value) => !value); // проверяю, есть ли хотя бы одно пустое поле
         setIsFieldsFilled(!isEmpty);
     }, [editedWord]);
-
-    // обработчик для удаления элемента
-    const handleDelete = () => {
-        props.onDelete(props.word.id);
-    };
 
     // включение режима редактирования
     const handleEdit = () => {
@@ -50,13 +46,25 @@ export default function PostItem(props) {
         }
     };
 
+    // обработчик для удаления элемента
+    const handleDelete = async () => {
+        try {
+            await deleteWord(props.word.id);
+            props.onDelete(props.word.id);
+        } catch (error) {
+            console.error('Ошибка при удалении слова:', error);
+            setError(`Ошибка при удалении слова: ${error.message}`); // сохраняю ошибку в состоянии
+        }
+    };
+
     // отмена изменений и выход из режима редактирования
     const handleCancel = () => {
         // восстановление исходных данных
         setEditedWord({
             english: props.word.english,
             transcription: props.word.transcription,
-            russian: props.word.russian
+            russian: props.word.russian,
+            tags: props.word.tags
         });
         setIsEditing(false);
     }
