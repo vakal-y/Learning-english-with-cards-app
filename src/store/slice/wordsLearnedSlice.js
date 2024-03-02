@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//выавы
 const wordsLearnedSlice = createSlice({
     name: 'wordsLearned',
     initialState: {
