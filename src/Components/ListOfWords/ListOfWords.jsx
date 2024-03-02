@@ -9,6 +9,7 @@ export default function ListOfWords() {
     const dispatch = useDispatch();
     const words = useSelector(state => state.word.words); // получение данных из Redux store 
 
+    // беру массив слов с сервера через Redux
     useEffect(() => {
         const getData = async () => {
             try {
