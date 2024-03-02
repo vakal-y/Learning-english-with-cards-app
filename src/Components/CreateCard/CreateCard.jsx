@@ -1,16 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState } from "react";
 import './CreateCard.scss';
 import CheckButton from "../CheckButton/CheckButton";
-import { useDispatch } from "react-redux";
-import { setWordsLearned } from "../../store/slice/wordsLearnedSlice";
+
 
 // компонент для отображения карточки слова
 // принимает слово (item) и функцию для обновления количества выученных слов (setWordsLearned)
-export default function CreateCard({ item }) {
-    const [wordsLearned, setWordsLearned] = useState(0);
-
+export default function CreateCard({ item, onViewTranslation, setWordsLearned, wordsLearned }) {
     const handleViewTranslation = () => {
-        setWordsLearned(prevCount => prevCount + 1);
+        onViewTranslation(); // вызываю функцию из родительского компонента
     };
 
     const { english, transcription } = item;

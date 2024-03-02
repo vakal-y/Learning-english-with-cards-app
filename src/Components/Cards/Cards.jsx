@@ -5,14 +5,13 @@ import arrowLeft from '../../assets/arrow1-01.svg';
 import arrowRight from '../../assets/arrow2-01.svg';
 import { gsap } from 'gsap';
 import { useDispatch, useSelector } from "react-redux";
-import { setWordsLearned } from '../../store/slice/wordsLearnedSlice';
 import { setActiveCardIndex, setWords } from '../../store/slice/wordReducer';
 
 export default function Cards() {
     const dispatch = useDispatch();
     const activeCardIndex = useSelector(state => state.word.activeCardIndex);
-    const wordsLearned = useSelector(state => state.word.wordsLearned);
     const words = useSelector((state) => state.word.words);
+    const [wordsLearned, setWordsLearned] = useState(0);
 
     // беру массив слов с сервера через Redux
     useEffect(() => {
@@ -54,7 +53,7 @@ export default function Cards() {
 
     // обработчик для увеличения счетчика выученных слов
     const handleViewTranslation = () => {
-        dispatch(setWordsLearned());
+        setWordsLearned(prevCount => prevCount + 1);
         console.log('Количество выученных слов:', wordsLearned + 1);
     };
 
