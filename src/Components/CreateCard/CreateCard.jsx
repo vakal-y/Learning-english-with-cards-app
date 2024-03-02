@@ -7,13 +7,12 @@ import { setWordsLearned } from "../../store/slice/wordsLearnedSlice";
 // компонент для отображения карточки слова
 // принимает слово (item) и функцию для обновления количества выученных слов (setWordsLearned)
 export default function CreateCard({ item }) {
-    const dispatch = useDispatch();
+    const [wordsLearned, setWordsLearned] = useState(0);
 
     const handleViewTranslation = () => {
-        dispatch(setWordsLearned());
+        setWordsLearned(prevCount => prevCount + 1);
     };
 
-    // извлечение английского слова и транскрипции из объекта слова
     const { english, transcription } = item;
 
     return (
